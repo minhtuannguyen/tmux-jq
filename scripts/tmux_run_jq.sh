@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# fetching the directory where plugins are installed
-plugin_path="$(tmux show-env -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
+buffer_content="$(tmux show-buffer)"
+status=$(curl -s -o /dev/null -w '%{http_code}' ${buffer_content})
 
-# listing installed plugins
-ls -1 "$plugin_path"
+if [ ${status} -eq 200 ]; then
+    curl -s  "$buffer_content" | jq .
+  else
+    echo "Got $status for the resource $buffer_content"
+fi
