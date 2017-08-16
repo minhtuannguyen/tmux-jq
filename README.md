@@ -40,7 +40,3 @@ Reload TMUX environment:
     $ tmux source-file ~/.tmux.conf
 
 You should now be able to use the plugin.
-### License
-
-[Apache](LICENSE.md)
-
